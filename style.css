@@ -1,3 +1,16 @@
 .dropdown-toggle::after {
   content: none;
 }
+#baColor {
+  max-height: 150px;
+  min-height: 150px;
+  overflow: auto;
+}
+
+.card {
+  margin: 10px;
+}
+
+.dropdown {
+  cursor: pointer;
+}
