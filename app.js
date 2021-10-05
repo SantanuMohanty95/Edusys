@@ -38,11 +38,6 @@ function deleteTask(title) {
   getTasks();
 }
 
-function editTask(each, i) {
-  console.log(each);
-  var a = each;
-  console.log(a);
-}
 function getTasks() {
   let tasks = JSON.parse(localStorage.getItem("tasks"));
   let tasksView = document.getElementById("tasks");
@@ -56,8 +51,8 @@ function getTasks() {
 
     if (s.length) {
       var list = s
-        .map(function (each) {
-          return "<li>" + each + "</li>";
+        .map(function (each, i) {
+          return `<li id=item${i}>${each}</li>`;
         })
         .join("");
     }
@@ -66,7 +61,7 @@ function getTasks() {
 
     tasksView.innerHTML += `<div class="col-lg-4 p-1">
            <div class="card" >
-            <div class="card-body" id="bodyColor" >
+            <div class="card-body" id="bodyColor${i}" >
               <div class="d-flex justify-content-between" >
                  <h3>${title}</h3>
                 <div class="dropdown">
@@ -87,7 +82,7 @@ function getTasks() {
                       </div>
                       <div class="d-flex justify-content-around borderTop">
                         <p onclick="deleteTask('${title}')" >Delete</p>
-                       <p onclick="editTask('${eachData}','${i}')" >Edit</p>
+                       <p onclick="editTask('${i}')" >Edit</p>
                       </div>
                     </div>
                   </div>
@@ -105,15 +100,21 @@ function getTasks() {
 
 getTasks();
 
-// for (i = 0; i < document.getElementById('container').children.length; i++) {
-//   document.getElementById('container').children[i].onclick = function(){alert('Number ' + i + ' was clicked')};
-// }
+function editTask(i) {
+  let tasks = JSON.parse(localStorage.getItem("tasks"));
+
+  tasks[i].title = "change";
+  tasks[i].description = "chgbg";
+  console.log(tasks[i]);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
 function handelBgChangeOne(title, index) {
   let tasks = JSON.parse(localStorage.getItem("tasks"));
-  var bgColor = document.getElementById("bodyColor");
+  var bgColor = document.getElementById(`bodyColor${index}`);
   console.log(bgColor);
   for (let i = 0; i < tasks.length; i++) {
-    if (tasks[i].title == title) {
+    if (tasks[index].title == title) {
       bgColor.style.background = "white";
     }
   }
@@ -121,7 +122,7 @@ function handelBgChangeOne(title, index) {
 
 function handelBgChangeTwo(title, index) {
   let tasks = JSON.parse(localStorage.getItem("tasks"));
-  var bgColor = document.getElementById("bodyColor");
+  var bgColor = document.getElementById(`bodyColor${index}`);
   for (let i = 0; i < tasks.length; i++) {
     if (tasks[i].title == title) {
       console.log(tasks[i]);
@@ -132,7 +133,7 @@ function handelBgChangeTwo(title, index) {
 
 function handelBgChangeThree(title, index) {
   let tasks = JSON.parse(localStorage.getItem("tasks"));
-  var bgColor = document.getElementById("bodyColor");
+  var bgColor = document.getElementById(`bodyColor${index}`);
   console.log(bgColor);
   for (let i = 0; i < tasks.length; i++) {
     if (tasks[i].title == title) {
@@ -143,7 +144,7 @@ function handelBgChangeThree(title, index) {
 
 function handelBgChangeFour(title, index) {
   let tasks = JSON.parse(localStorage.getItem("tasks"));
-  var bgColor = document.getElementById("bodyColor");
+  var bgColor = document.getElementById(`bodyColor${index}`);
   console.log(bgColor);
   for (let i = 0; i < tasks.length; i++) {
     if (tasks[i].title == title) {
@@ -152,9 +153,9 @@ function handelBgChangeFour(title, index) {
   }
 }
 
-function handelBgChangeFive(title) {
+function handelBgChangeFive(title, index) {
   let tasks = JSON.parse(localStorage.getItem("tasks"));
-  var bgColor = document.getElementById("bodyColor");
+  var bgColor = document.getElementById(`bodyColor${index}`);
   console.log(bgColor);
   for (let i = 0; i < tasks.length; i++) {
     if (tasks[i].title == title) {
@@ -163,13 +164,13 @@ function handelBgChangeFive(title) {
   }
 }
 
-function handelBgChangeSix(title) {
+function handelBgChangeSix(title, index) {
   let tasks = JSON.parse(localStorage.getItem("tasks"));
-  var bgColor = document.getElementById("bodyColor");
+  var bgColor = document.getElementById(`bodyColor${index}`);
   console.log(bgColor);
   for (let i = 0; i < tasks.length; i++) {
     if (tasks[i].title == title) {
-      bgColor.style.background = "#f9dcd5";
+      bgColor.style.background = "#fdf7d7";
     }
   }
 }

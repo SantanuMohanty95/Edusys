@@ -14,3 +14,8 @@
 .dropdown {
   cursor: pointer;
 }
+
+#threeDot:hover {
+  background-color: #e8e8e8;
+  border-radius: 2px;
+}
